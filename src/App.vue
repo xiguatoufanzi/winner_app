@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="box"></div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -11,10 +11,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.box {
-  width: 375px;
-  height: 100px;
-  background: pink;
-}
-</style>
+<style lang="stylus" scoped></style>
