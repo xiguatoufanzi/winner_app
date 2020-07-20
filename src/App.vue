@@ -15,4 +15,8 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="less">
+body {
+  background: #eee;
+}
+</style>

@@ -14,37 +14,24 @@
       </div>
 
       <!-- 头部导航 -->
-      <div class="headerNav">
-        <ul class="navList">
-          <li class="navItem active">推荐</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
-          <li class="navItem">居家生活</li>
+      <div class="headerNav" ref="wrapper">
+        <ul class="navList" v-if="homeData.kingKongModule">
+          <li
+            class="navItem "
+            :class="{ active: navIndex === 0 }"
+            @click="changeNav(0)"
+          >
+            推荐
+          </li>
+          <li
+            class="navItem"
+            :class="{ active: navIndex === index + 1 }"
+            v-for="(navItem, index) in homeData.kingKongModule.kingKongList"
+            :key="index"
+            @click="changeNav(index + 1)"
+          >
+            {{ navItem.text }}
+          </li>
         </ul>
       </div>
     </div>
@@ -56,22 +43,52 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 import BScroll from "better-scroll";
 import Recommend from "./Recommend/Recommend";
 export default {
   name: "home",
 
+  data() {
+    return {
+      navIndex: 0, //导航下标
+    };
+  },
+
   mounted() {
-    this.initBScroll();
+    this.getHomeData();
+  },
+
+  watch: {
+    homeData(value) {
+      this.$nextTick(() => {
+        this.initBScroll();
+      });
+    },
+  },
+
+  computed: {
+    ...mapState({
+      homeData: (state) => state.home.homeData,
+    }),
   },
 
   methods: {
     // 创建BScroll
     initBScroll() {
-      let scroll = new BScroll(".headerNav", {
+      let scroll = new BScroll(this.$refs.wrapper, {
         scrollX: true,
+        click: true,
       });
     },
+
+    // 切换头部导航
+    changeNav(navIndex) {
+      if (navIndex === this.navIndex) return;
+      this.navIndex = navIndex;
+    },
+
+    ...mapActions(["getHomeData"]),
   },
 
   components: {
@@ -82,6 +99,7 @@ export default {
 
 <style lang="less" scoped>
 #headerContainer {
+  background: #fff;
   .header {
     display: flex;
     align-items: center;
@@ -131,7 +149,7 @@ export default {
       white-space: nowrap;
       padding: 0 30px;
       .navItem {
-        padding: 0 16px;
+        padding: 0 26px;
         font-size: 28px;
         color: #555;
         text-align: center;
