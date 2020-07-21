@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 顶部 -->
     <div id="headerContainer">
       <!-- 头部区域 -->
       <div class="header">
@@ -33,9 +34,43 @@
             {{ navItem.text }}
           </li>
         </ul>
+        <van-collapse
+          v-model="activeNames"
+          class="openNav"
+          @click.native="openNav"
+          accordion
+        >
+          <van-collapse-item name="1"></van-collapse-item>
+        </van-collapse>
       </div>
-    </div>
 
+      <div class="openNavList" v-show="showNav">
+        <div class="title">
+          全部频道
+        </div>
+        <ul class="navList2" v-if="homeData.kingKongModule">
+          <li
+            class="navItem"
+            :class="{ active: navIndex === 0 }"
+            @click="changeNav(0)"
+          >
+            推荐
+          </li>
+          <li
+            class="navItem"
+            :class="{ active: navIndex === index + 1 }"
+            v-for="(navItem, index) in homeData.kingKongModule.kingKongList"
+            :key="index"
+            @click="changeNav(index + 1)"
+          >
+            {{ navItem.text }}
+          </li>
+        </ul>
+      </div>
+
+      <van-overlay :show="show" z-index="5" @click="openNav(2)" duration="0" />
+    </div>
+    <!-- 内容 -->
     <div class="contentContainer">
       <Recommend></Recommend>
     </div>
@@ -51,7 +86,10 @@ export default {
 
   data() {
     return {
-      navIndex: 0, //导航下标
+      navIndex: "", //导航下标
+      show: false, // 遮罩层标识
+      showNav: false, // 头部导航展开标识
+      activeNames: "",
     };
   },
 
@@ -89,6 +127,15 @@ export default {
     },
 
     ...mapActions(["getHomeData"]),
+
+    // 展开头部导航
+    openNav(num) {
+      this.show = !this.show;
+      this.showNav = !this.showNav;
+      if (num === 2) {
+        this.activeNames = 0;
+      }
+    },
   },
 
   components: {
@@ -100,7 +147,11 @@ export default {
 <style lang="less" scoped>
 #headerContainer {
   background: #fff;
+  position: relative;
   .header {
+    position: relative;
+    z-index: 6;
+    background: #fff;
     display: flex;
     align-items: center;
     padding: 16px 30px;
@@ -140,7 +191,9 @@ export default {
       border-radius: 5px;
     }
   }
+
   .headerNav {
+    position: relative;
     width: 750px;
     overflow: hidden;
     display: flex;
@@ -166,6 +219,59 @@ export default {
             height: 4px;
             background-color: #dd1a21;
           }
+        }
+      }
+    }
+
+    .openNav {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100px;
+      height: 60px;
+      line-height: 60px;
+      z-index: 11;
+      /deep/.van-cell {
+        padding: 0;
+        .van-icon {
+          left: 25px;
+          top: 5px;
+          font-size: 40px;
+        }
+      }
+    }
+  }
+
+  // 打开导肮
+  .openNavList {
+    position: absolute;
+    left: 0;
+    top: 88px;
+    z-index: 10;
+    background: #fff;
+    width: 100%;
+    .title {
+      padding-left: 30px;
+      height: 60px;
+      line-height: 60px;
+      font-size: 28px;
+    }
+    .navList2 {
+      padding-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      .navItem {
+        width: 148px;
+        height: 54px;
+        line-height: 54px;
+        text-align: center;
+        background: #fafafa;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin: 0 0 40px 30px;
+        &.active {
+          border: 1px solid #dd1a21;
+          color: #dd1a21;
         }
       }
     }

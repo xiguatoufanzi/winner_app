@@ -4,10 +4,16 @@
 
 <script>
 export default {
-  name: '',
-}
+  name: "category",
+
+  data() {
+    return {
+      cateLists: [], // 分类数据
+    };
+  },
+
+  mounted() {},
+};
 </script>
 
-<style lang="stylus" scoped>
-
-</style>
+<style lang="less" scoped></style>

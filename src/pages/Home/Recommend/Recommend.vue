@@ -1,6 +1,6 @@
 <template>
   <div ref="wrapper" class="recommendContainer">
-    <div style="height: 8000px">
+    <div>
       <!-- 轮播 -->
       <div class="swiper-container" ref="swiper">
         <div class="swiper-wrapper">
@@ -144,7 +144,63 @@
           </div>
         </div>
       </div>
+
+      <!-- 员工精选 -->
+      <div class="workerBuy">
+        <div class="left">
+          <div class="title">严选超市</div>
+          <div class="desc">10元凑好物</div>
+          <div class="picList">
+            <img
+              src="https://yanxuan-item.nosdn.127.net/cfd0fec5e70ca09d4c0b7492dba26f2e.png?quality=75&amp;type=webp&amp;imageView&amp;thumbnail=150x150"
+              class="pic"
+            /><img
+              src="https://yanxuan-item.nosdn.127.net/1eecf74b769af3ed4c7817aeb5d6bb2b.png?quality=75&amp;type=webp&amp;imageView&amp;thumbnail=150x150"
+              class="pic"
+            />
+          </div>
+        </div>
+        <div class="right">
+          <div class="title">员工精选</div>
+          <div class="desc">自动伞75折</div>
+          <div class="picList">
+            <img
+              src="https://yanxuan-item.nosdn.127.net/f3f18a4fe9e7905cd7c9ff28e42ff0c2.png?quality=75&type=webp&imageView&thumbnail=150x150"
+              class="pic"
+            /><img
+              src="https://yanxuan-item.nosdn.127.net/fe544cee59cc95a9159a722b6be01faa.png?quality=75&type=webp&imageView&thumbnail=150x150"
+              class="pic"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部版权 -->
+      <div class="ftWrap">
+        <div class="bd">
+          <a
+            href="/downloadapp?_stat_from=search_pz_baidu_29&amp;appAwakeUrl=http%3a%2f%2fm.you.163.com"
+            class="goApp"
+            >下载APP</a
+          ><a
+            href="https://you.163.com?_m_forcepc_=true&amp;_m_anonid_=ff1b6ade-2a7c-4539-a6e2-af40e1d43dbb"
+            class="goWeb"
+            >电脑版</a
+          >
+        </div>
+        <p class="copyright">
+          网易公司版权所有 © 1997-2020<br />食品经营许可证：JY13301080111719
+        </p>
+      </div>
     </div>
+
+    <!-- 固定定位 -->
+    <a
+      class="goGift"
+      href="https://act.you.163.com/act/pub/qAU4P437asfF.html"
+    ></a>
+
+    <ToTop v-show="backtop" @click.native="goTop" />
   </div>
 </template>
 
@@ -153,6 +209,7 @@ import { mapState } from "vuex";
 import Swiper from "swiper";
 import BScroll from "better-scroll";
 import Carousel from "@/components/Carousel";
+import ToTop from "@/components/ToTop";
 export default {
   name: "recommend",
 
@@ -180,6 +237,8 @@ export default {
             "https://yanxuan.nosdn.127.net/668b5187e5a7c283ca8bb5695d3e87f0.jpg?type=webp&imageView&quality=75&thumbnail=750x0",
         },
       ],
+
+      backtop: false,
     };
   },
 
@@ -214,22 +273,32 @@ export default {
 
     // 创建BScroll
     initBScroll() {
-      let scroll = new BScroll(this.$refs.wrapper, {
+      this.bs = new BScroll(this.$refs.wrapper, {
         scrollY: true,
         bounce: false,
+        click: true,
+        probeType: 3,
       });
+
+      this.bs.on("scroll", ({ x, y }) => {
+        this.backtop = -y > 700;
+      });
+    },
+
+    goTop() {
+      this.bs.scrollTo(0, 0, 700);
     },
   },
 
   components: {
-    Carousel,
+    ToTop,
   },
 };
 </script>
 
 <style lang="less" scoped>
 .recommendContainer {
-  height: calc(100vh - 300px);
+  height: calc(100vh - 240px);
   overflow: hidden;
 }
 
@@ -489,6 +558,7 @@ export default {
 // 限时购
 .flashSale {
   background: #fff;
+  margin-bottom: 20px;
   .flashSaleHeader {
     display: flex;
     justify-content: space-between;
@@ -550,6 +620,91 @@ export default {
         color: #7f7f7f;
         text-decoration: line-through;
       }
+    }
+  }
+}
+
+// 员工购
+.workerBuy {
+  background: #fff;
+  padding: 10px 30px 30px 26px;
+  display: flex;
+  .left,
+  .right {
+    width: 50%;
+    background: #f5f5f5;
+    margin: 4px 0 0 8px;
+    padding: 20px 0 0 20px;
+    .title {
+      font-size: 32px;
+      padding-left: 10px;
+      color: rgb(51, 51, 51);
+    }
+    .desc {
+      font-size: 24px;
+      padding-left: 10px;
+      color: rgb(127, 127, 127);
+    }
+    .picList {
+      img {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  }
+}
+
+// 版权
+.ftWrap {
+  background: #414141;
+  padding: 54px 20px 28px 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  text-align: center;
+  .bd {
+    margin-bottom: 36px;
+    .goApp,
+    .goWeb {
+      width: 172px;
+      font-size: 24px;
+      border: 1px solid #999;
+      margin-right: 50px;
+      height: 62px;
+      line-height: 62px;
+      color: #fff;
+      background-color: transparent;
+      display: inline-block;
+    }
+    .goWeb {
+      margin: 0;
+    }
+  }
+  .copyright {
+    font-size: 24px;
+    line-height: 32px;
+    color: #999;
+  }
+}
+
+// 固定定位
+.goGift {
+  position: fixed;
+  right: 0;
+  bottom: 240px;
+  width: 112px;
+  height: 80px;
+  z-index: 10;
+  animation: 0.8s moveLeft linear;
+  background: url("http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/wapNewUserEntry-b69d0624fd.png?imageView&type=webp");
+  background-size: 100% 100%;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+
+  @keyframes moveLeft {
+    from {
+      right: -200px;
+    }
+    to {
+      right: 0;
     }
   }
 }
