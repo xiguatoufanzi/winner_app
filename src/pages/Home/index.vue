@@ -70,6 +70,7 @@
 
       <van-overlay :show="show" z-index="5" @click="openNav(2)" duration="0" />
     </div>
+    
     <!-- 内容 -->
     <div class="contentContainer">
       <Recommend></Recommend>

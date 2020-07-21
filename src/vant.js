@@ -9,6 +9,8 @@ import {
   Collapse,
   CollapseItem,
   Overlay,
+  Sidebar,
+  SidebarItem,
 } from "vant";
 
 Vue.use(Button);
@@ -20,3 +22,5 @@ Vue.use(CountDown);
 Vue.use(Collapse);
 Vue.use(CollapseItem);
 Vue.use(Overlay);
+Vue.use(Sidebar);
+Vue.use(SidebarItem);
