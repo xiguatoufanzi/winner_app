@@ -20,7 +20,7 @@
           <li
             class="navItem "
             :class="{ active: navIndex === 0 }"
-            @click="changeNav(0)"
+            @click="changeNav(0, 0)"
           >
             推荐
           </li>
@@ -29,7 +29,7 @@
             :class="{ active: navIndex === index + 1 }"
             v-for="(navItem, index) in homeData.kingKongModule.kingKongList"
             :key="index"
-            @click="changeNav(index + 1)"
+            @click="changeNav(index + 1, navItem.L1Id)"
           >
             {{ navItem.text }}
           </li>
@@ -70,10 +70,11 @@
 
       <van-overlay :show="show" z-index="5" @click="openNav(2)" duration="0" />
     </div>
-    
+
     <!-- 内容 -->
     <div class="contentContainer">
-      <Recommend></Recommend>
+      <Recommend v-if="navIndex === 0"></Recommend>
+      <RecommendCategory v-else :navId="navId"></RecommendCategory>
     </div>
   </div>
 </template>
@@ -82,15 +83,17 @@
 import { mapState, mapActions } from "vuex";
 import BScroll from "better-scroll";
 import Recommend from "./Recommend/Recommend";
+import RecommendCategory from "./RecommendCategory/RecommendCategory";
 export default {
   name: "home",
 
   data() {
     return {
-      navIndex: "", //导航下标
+      navIndex: 0, //导航下标
       show: false, // 遮罩层标识
       showNav: false, // 头部导航展开标识
       activeNames: "",
+      navId: "", // 选中导航id
     };
   },
 
@@ -122,9 +125,10 @@ export default {
     },
 
     // 切换头部导航
-    changeNav(navIndex) {
+    changeNav(navIndex, navId) {
       if (navIndex === this.navIndex) return;
       this.navIndex = navIndex;
+      this.navId = navId;
     },
 
     ...mapActions(["getHomeData"]),
@@ -141,6 +145,7 @@ export default {
 
   components: {
     Recommend,
+    RecommendCategory,
   },
 };
 </script>

@@ -308,7 +308,7 @@ export default {
   .swiper-slide {
     img {
       width: 750px;
-      height: 370px;
+      height: 296px;
     }
   }
   /deep/.swiper-pagination {
