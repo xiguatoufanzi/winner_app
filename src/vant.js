@@ -11,6 +11,12 @@ import {
   Overlay,
   Sidebar,
   SidebarItem,
+  NavBar,
+  SwipeCell,
+  Card,
+  Stepper,
+  Checkbox,
+  CheckboxGroup,
 } from "vant";
 
 Vue.use(Button);
@@ -24,3 +30,9 @@ Vue.use(CollapseItem);
 Vue.use(Overlay);
 Vue.use(Sidebar);
 Vue.use(SidebarItem);
+Vue.use(NavBar);
+Vue.use(SwipeCell);
+Vue.use(Card);
+Vue.use(Stepper);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);

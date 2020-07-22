@@ -61,8 +61,8 @@ export default {
       // console.log(scrollData);
     },
     loadmore(index) {
-      console.log(666666);
-      this.firstData = this.firstData.concat(this.firstData);
+      // console.log(666666);
+      // this.firstData = this.firstData.concat(this.firstData);
     },
   },
 };
