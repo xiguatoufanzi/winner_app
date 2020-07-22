@@ -1,78 +1,44 @@
 <template>
   <div>
-    <van-tabbar
-      v-model="active"
-      @change="onChange"
-      border
-      active-color="#B4282D"
-      route
-    >
-      <van-tabbar-item replace to="/">
-        <span>首页</span>
-        <template #icon="props">
-          <img :src="props.active ? icon.active : icon.inactive" />
-        </template>
-      </van-tabbar-item>
-      <van-tabbar-item replace to="/category">
-        <span>分类</span>
-        <template #icon="props">
-          <img :src="props.active ? icon.active1 : icon.inactive1" />
-        </template>
-      </van-tabbar-item>
-      <van-tabbar-item replace to="/goodbuy">
-        <span>值得买</span>
-        <template #icon="props">
-          <img :src="props.active ? icon.active2 : icon.inactive2" />
-        </template>
-      </van-tabbar-item>
-      <van-tabbar-item replace to="/cart">
-        <span>购物车</span>
-        <template #icon="props">
-          <img :src="props.active ? icon.active3 : icon.inactive3" />
-        </template>
-      </van-tabbar-item>
-      <van-tabbar-item replace to="/personal">
-        <span>个人</span>
-        <template #icon="props">
-          <img :src="props.active ? icon.active4 : icon.inactive4" />
-        </template>
-      </van-tabbar-item>
-    </van-tabbar>
+    <!-- 导航 -->
+    <div class="navBar">
+      <van-icon name="wap-home-o" size="26" color="#777" />
+      <span>{{ title }}</span>
+      <div class="right">
+        <van-icon name="search" size="26" class="search" color="#777" />
+        <van-icon name="shopping-cart-o" size="26" color="#777" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { Tabbar, TabbarItem } from "vant";
 export default {
   name: "navbar",
-
-  data() {
-    return {
-      active: 0,
-      icon: {
-        active: require("../../assets/images/tabBar/tab-home-current.png"),
-        inactive: require("../../assets/images/tabBar/tab-home.png"),
-
-        active1: require("../../assets/images/tabBar/tab-cate-current.png"),
-        inactive1: require("../../assets/images/tabBar/tab-cate.png"),
-
-        active2: require("../../assets/images/tabBar/buy-current.png"),
-        inactive2: require("../../assets/images/tabBar/buy.png"),
-
-        active3: require("../../assets/images/tabBar/tab-cart-current.png"),
-        inactive3: require("../../assets/images/tabBar/tab-cart.png"),
-
-        active4: require("../../assets/images/tabBar/tab-my-current.png"),
-        inactive4: require("../../assets/images/tabBar/tab-my.png"),
-      },
-    };
-  },
-
-  methods: {
-    // 切换导航
-    onChange(index) {},
+  props: {
+    title: String,
   },
 };
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="less" scoped>
+.navBar {
+  background: #fff;
+  padding: 0 26px 0 24px;
+  height: 100px;
+  line-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  span {
+    font-size: 38px;
+    margin-right: -100px;
+  }
+  .right {
+    display: flex;
+    .search {
+      margin-right: 30px;
+    }
+  }
+}
+</style>

@@ -4,10 +4,10 @@
 
 <script>
 export default {
-  name: '',
+  name: 'cart',
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="less" scoped>
 
 </style>
