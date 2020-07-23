@@ -17,6 +17,9 @@ import {
   Stepper,
   Checkbox,
   CheckboxGroup,
+  Divider,
+  Grid,
+  GridItem,
 } from "vant";
 
 Vue.use(Button);
@@ -36,3 +39,6 @@ Vue.use(Card);
 Vue.use(Stepper);
 Vue.use(Checkbox);
 Vue.use(CheckboxGroup);
+Vue.use(Divider);
+Vue.use(Grid);
+Vue.use(GridItem);
