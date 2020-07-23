@@ -25,7 +25,11 @@
           <img :src="props.active ? icon.active2 : icon.inactive2" />
         </template>
       </van-tabbar-item>
-      <van-tabbar-item replace to="/cart">
+      <van-tabbar-item
+        replace
+        to="/cart"
+        :badge="selectedNum === 0 ? '' : selectedNum"
+      >
         <span>购物车</span>
         <template #icon="props">
           <img :src="props.active ? icon.active3 : icon.inactive3" />
@@ -43,6 +47,7 @@
 
 <script>
 import { Tabbar, TabbarItem } from "vant";
+import { mapGetters } from "vuex";
 export default {
   name: "tabbar",
 
@@ -66,6 +71,10 @@ export default {
         inactive4: require("../../assets/images/tabBar/tab-my.png"),
       },
     };
+  },
+
+  computed: {
+    ...mapGetters(["selectedNum"]),
   },
 
   methods: {

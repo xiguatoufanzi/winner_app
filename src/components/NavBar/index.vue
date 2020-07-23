@@ -2,21 +2,41 @@
   <div>
     <!-- 导航 -->
     <div class="navBar">
-      <van-icon name="wap-home-o" size="26" color="#777" />
+      <van-icon name="wap-home-o" size="26" color="#777" @click="gohome" />
       <span>{{ title }}</span>
       <div class="right">
         <van-icon name="search" size="26" class="search" color="#777" />
-        <van-icon name="shopping-cart-o" size="26" color="#777" />
+        <van-icon
+          name="shopping-cart-o"
+          size="26"
+          color="#777"
+          @click="goCart"
+          :badge="selectedNum === 0 ? '' : selectedNum"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "navbar",
   props: {
     title: String,
+  },
+
+  computed: {
+    ...mapGetters(["selectedNum"]),
+  },
+
+  methods: {
+    gohome() {
+      this.$router.push("/");
+    },
+    goCart() {
+      this.$router.push("cart");
+    },
   },
 };
 </script>

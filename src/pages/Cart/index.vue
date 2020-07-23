@@ -37,11 +37,13 @@
       </div>
     </div>
 
-    <!-- 有物品界面 -->
-    <cartItem></cartItem>
+    <div v-else>
+      <!-- 有物品界面 -->
+      <cartItem></cartItem>
 
-    <!-- 底部 -->
-    <CartBottom />
+      <!-- 底部 -->
+      <CartBottom />
+    </div>
   </div>
 </template>
 

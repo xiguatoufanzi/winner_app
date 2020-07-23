@@ -1,38 +1,54 @@
 <template>
   <div>
     <div class="cart">
-      <van-swipe-cell class="cartItem">
+      <van-swipe-cell
+        class="cartItem"
+        v-for="(item, index) in cartList"
+        :key="item.id"
+      >
         <template #right>
-          <van-button square text="删除" type="danger" class="delete-button" />
+          <van-button
+            square
+            text="删除"
+            type="danger"
+            class="delete-button"
+            @click="delCartItem"
+          />
         </template>
         <template #default>
-          <van-card price="149" title="商品标题" class="cardItem">
+          <van-card
+            :price="item.retailPrice"
+            :title="item.name"
+            class="cardItem"
+          >
             <template #tags>
               <van-checkbox
-                v-model="checked"
+                v-model="item.selected"
                 checked-color="#dd1a21"
                 class="check"
                 icon-size="18"
+                @change="changeSelected(item.selected, index)"
               ></van-checkbox>
             </template>
 
             <template #thumb>
-              <img
-                src="https://yanxuan-item.nosdn.127.net/8037ef53fb7b08e652e7c9c08d4a07fe.png?type=webp&imageView&thumbnail=160x0&quality=75"
-                alt=""
-                class="cartImg"
-              />
+              <img :src="item.listPicUrl" alt="" class="cartImg" />
             </template>
 
             <template #desc>
               <div class="desc">
-                <span>知性黑白</span>
+                <span>{{ item.promotionDesc }}</span>
                 <van-icon name="arrow-down" class="arrow" />
               </div>
             </template>
 
             <template #num>
-              <van-stepper default-value="1" class="count" />
+              <van-stepper
+                v-model="item.count"
+                default-value="1"
+                class="count"
+                :min="1"
+              />
             </template>
             <!--  -->
           </van-card>
@@ -43,13 +59,32 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "cartitem",
 
   data() {
-    return {
-      checked: true,
-    };
+    return {};
+  },
+
+  computed: {
+    ...mapState({
+      cartList: (state) => state.cart.cartList,
+    }),
+  },
+
+  methods: {
+    ...mapMutations(["CHANGE_SELECTED"]),
+
+    // 删除购物车项
+    delCartItem() {
+      Toast("提示内容");
+    },
+
+    // 改变选中状态
+    changeSelected(selected, index) {
+      this.CHANGE_SELECTED({ selected, index });
+    },
   },
 };
 </script>
@@ -77,6 +112,7 @@ export default {
       height: 172px;
     }
     .desc {
+      margin: 10px 0;
       padding: 0 10px;
       color: #7f7f7f;
       background: #fafafa;
@@ -85,6 +121,9 @@ export default {
       .arrow {
         margin: 10px 10px 0 13px;
       }
+    }
+    .count {
+      margin-top: -10px;
     }
   }
 }

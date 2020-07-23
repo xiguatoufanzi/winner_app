@@ -7,12 +7,13 @@
           checked-color="#dd1a21"
           class="check"
           icon-size="18"
+          @click="changeAllSelected(!isAllSelected)"
         ></van-checkbox>
-        <span>已选(1)</span>
+        <span>已选({{ selectedNum }})</span>
       </div>
 
       <div class="cartRight">
-        <span class="money">合计:￥149</span>
+        <span class="money">合计:￥{{ totalPrice }}</span>
         <button class="pay">下单</button>
       </div>
     </div>
@@ -20,13 +21,32 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "cartbottom",
 
   data() {
     return {
-      checked: true,
+      checked: false,
     };
+  },
+
+  computed: {
+    ...mapGetters(["isAllSelected", "selectedNum", "totalPrice"]),
+  },
+
+  watch: {
+    isAllSelected(value) {
+      this.checked = value;
+    },
+  },
+
+  methods: {
+    ...mapMutations(["CHANGE_ALL_CHANGE_SELECTED"]),
+
+    changeAllSelected(selected) {
+      this.CHANGE_ALL_CHANGE_SELECTED(selected);
+    },
   },
 };
 </script>

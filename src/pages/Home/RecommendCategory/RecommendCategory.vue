@@ -28,7 +28,7 @@
             class="cateItem"
             v-for="cateItem in navData.itemList"
             :key="cateItem.id"
-            @click="toDetail"
+            @click="toDetail(cateItem)"
           >
             <img :src="cateItem.listPicUrl" alt="" />
             <div class="cateName">{{ cateItem.name }}</div>
@@ -96,8 +96,11 @@ export default {
 
   methods: {
     // 去详情页
-    toDetail() {
-      this.$router.push("/detail");
+    toDetail(cateItem) {
+      this.$router.push({
+        name: "detail",
+        query: { cateItem },
+      });
     },
 
     // 创建轮播
