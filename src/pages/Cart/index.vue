@@ -8,7 +8,7 @@
     </van-nav-bar>
 
     <!-- 没物品界面 -->
-    <div class="nothing" v-if="false">
+    <div class="nothing" v-if="!cartList.length">
       <div>
         <ul class="servicePolicy">
           <li class="item">
@@ -48,22 +48,27 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import BScroll from "better-scroll";
 import cartItem from "./cartItem/cartItem";
 import CartBottom from "./CartBottom/CartBottom";
 export default {
   name: "cart",
 
-  data() {
-    return {};
+  watch: {
+    cartList(value) {
+      if (value.length > 0) {
+        this.$nextTick(() => {
+          this.initBScroll();
+        });
+      }
+    },
   },
 
-  /* watch:{
-
-  }, */
-
-  mounted() {
-    this.initBScroll();
+  computed: {
+    ...mapState({
+      cartList: (state) => state.cart.cartList,
+    }),
   },
 
   methods: {

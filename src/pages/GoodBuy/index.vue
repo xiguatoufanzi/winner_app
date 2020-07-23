@@ -305,7 +305,7 @@ export default {
           line-height: 22.5px;
           white-space: nowrap;
           overflow: hidden;
-          font-size: 15px;
+          font-size: 20px;
         }
       }
     }
