@@ -28,6 +28,7 @@
             class="cateItem"
             v-for="cateItem in navData.itemList"
             :key="cateItem.id"
+            @click="toDetail"
           >
             <img :src="cateItem.listPicUrl" alt="" />
             <div class="cateName">{{ cateItem.name }}</div>
@@ -68,17 +69,17 @@ export default {
       handler(value) {
         this.$nextTick(() => {
           // 初始化轮播
-          this.initSwiper();
+          // this.initSwiper();
           this.initBScroll();
         });
       },
       // immediate: true, // 初始显示之前就立即调用一次
     },
 
-    navId(value) {
+    navData(value) {
       // this.swiper1.update(true);
       this.$nextTick(() => {
-        console.log(value);
+        console.log(this.navId);
         this.initSwiper();
       });
     },
@@ -94,6 +95,11 @@ export default {
   },
 
   methods: {
+    // 去详情页
+    toDetail() {
+      this.$router.push("/detail");
+    },
+
     // 创建轮播
     initSwiper() {
       this.swiper1 = new Swiper(this.$refs.swiper, {

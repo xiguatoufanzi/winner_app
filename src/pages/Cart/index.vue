@@ -39,11 +39,15 @@
 
     <!-- 有物品界面 -->
     <cartItem></cartItem>
+
+    <!-- 底部 -->
+    <CartBottom />
   </div>
 </template>
 
 <script>
 import cartItem from "./cartItem/cartItem";
+import CartBottom from "./CartBottom/CartBottom";
 export default {
   name: "cart",
 
@@ -53,6 +57,7 @@ export default {
 
   components: {
     cartItem,
+    CartBottom,
   },
 };
 </script>
@@ -60,7 +65,6 @@ export default {
 <style lang="less" scoped>
 // 头部导航
 .navBar {
-  margin-bottom: 20px;
   height: 88px;
   /deep/.van-nav-bar__text {
     color: #333;

@@ -64,6 +64,7 @@ export default {
     position: relative;
     padding-left: 86px;
     background: #fff;
+    margin-top: 20px;
     .check {
       position: absolute;
       left: -250px;
