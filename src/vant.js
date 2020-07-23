@@ -17,7 +17,6 @@ import {
   Stepper,
   Checkbox,
   CheckboxGroup,
-  Toast,
 } from "vant";
 
 Vue.use(Button);
@@ -37,4 +36,3 @@ Vue.use(Card);
 Vue.use(Stepper);
 Vue.use(Checkbox);
 Vue.use(CheckboxGroup);
-Vue.use(Toast);

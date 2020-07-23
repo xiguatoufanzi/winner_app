@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <div v-else>
+    <div v-else class="cartuse" ref="wrapper">
       <!-- 有物品界面 -->
       <cartItem></cartItem>
 
@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import BScroll from "better-scroll";
 import cartItem from "./cartItem/cartItem";
 import CartBottom from "./CartBottom/CartBottom";
 export default {
@@ -55,6 +56,25 @@ export default {
 
   data() {
     return {};
+  },
+
+  /* watch:{
+
+  }, */
+
+  mounted() {
+    this.initBScroll();
+  },
+
+  methods: {
+    // 创建BScroll
+    initBScroll() {
+      this.bs = new BScroll(this.$refs.wrapper, {
+        scrollY: true,
+        bounce: false,
+        click: true,
+      });
+    },
   },
 
   components: {
@@ -119,5 +139,10 @@ export default {
       text-align: center;
     }
   }
+}
+
+.cartuse {
+  overflow: hidden;
+  height: calc(100vh - 310px);
 }
 </style>

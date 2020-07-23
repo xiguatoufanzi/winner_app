@@ -12,7 +12,7 @@
             text="删除"
             type="danger"
             class="delete-button"
-            @click="delCartItem"
+            @click="delCartItem(index)"
           />
         </template>
         <template #default>
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import { Dialog } from "vant";
 import { mapState, mapMutations } from "vuex";
 export default {
   name: "cartitem",
@@ -74,11 +75,19 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["CHANGE_SELECTED"]),
+    ...mapMutations(["CHANGE_SELECTED", "DEL_CARTITEM"]),
 
     // 删除购物车项
-    delCartItem() {
-      Toast("提示内容");
+    delCartItem(index) {
+      Dialog.confirm({
+        title: "要删除当前所选商品？",
+        confirmButtonColor: "rgb(221, 26, 33)",
+        confirmButtonText: "删除",
+      })
+        .then(() => {
+          this.DEL_CARTITEM(index);
+        })
+        .catch(() => {});
     },
 
     // 改变选中状态

@@ -190,6 +190,11 @@ const mutations = {
   CHANGE_ALL_CHANGE_SELECTED(state, selected) {
     state.cartList.forEach((item) => (item.selected = selected));
   },
+
+  // 删除指定物品
+  DEL_CARTITEM(state, index) {
+    state.cartList.splice(index, 1);
+  },
 };
 
 const actions = {};
