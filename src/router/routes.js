@@ -4,7 +4,9 @@ import GoodBuy from "@/pages/GoodBuy";
 import Cart from "@/pages/Cart";
 import Personal from "@/pages/Personal";
 import Login from "@/pages/Login";
-import Detail from '@/components/Detail'
+import Phone from "@/pages/Phone";
+import Search from "@/pages/Search";
+import Detail from "@/components/Detail";
 
 export default [
   // 首页
@@ -42,11 +44,32 @@ export default [
     name: "login",
     path: "/login",
     component: Login,
+    meta: {
+      isHide: true,
+    },
   },
   // 物品详情页面
   {
     name: "detail",
     path: "/detail",
     component: Detail,
+  },
+  // 手机登陆页面
+  {
+    name: "phone",
+    path: "/phone/:id",
+    component: Phone,
+    meta: {
+      isHide: true,
+    },
+  },
+  // 搜索页面
+  {
+    name: "search",
+    path: "/search",
+    component: Search,
+    meta: {
+      isHide: true,
+    },
   },
 ];

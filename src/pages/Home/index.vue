@@ -11,7 +11,7 @@
           <i class="iconfont icon-sousuo"></i>
           <span>搜索商品，共34085款好物</span>
         </div>
-        <div class="btn">登录</div>
+        <div class="btn" @click="toLogin">登录</div>
       </div>
 
       <!-- 头部导航 -->
@@ -52,7 +52,7 @@
           <li
             class="navItem"
             :class="{ active: navIndex === 0 }"
-            @click="changeNav(0)"
+            @click="changeNav(0, 0)"
           >
             推荐
           </li>
@@ -61,7 +61,7 @@
             :class="{ active: navIndex === index + 1 }"
             v-for="(navItem, index) in homeData.kingKongModule.kingKongList"
             :key="index"
-            @click="changeNav(index + 1)"
+            @click="changeNav(index + 1, navItem.L1Id)"
           >
             {{ navItem.text }}
           </li>
@@ -116,6 +116,10 @@ export default {
   },
 
   methods: {
+    toLogin() {
+      this.$router.push("/login");
+    },
+
     // 创建BScroll
     initBScroll() {
       let scroll = new BScroll(this.$refs.wrapper, {
@@ -129,6 +133,9 @@ export default {
       if (navIndex === this.navIndex) return;
       this.navIndex = navIndex;
       this.navId = navId;
+      this.showNav = false;
+      this.show = false;
+      this.activeNames = "";
     },
 
     ...mapActions(["getHomeData"]),

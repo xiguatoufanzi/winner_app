@@ -43,7 +43,8 @@ export default {
 
 <style lang="less" scoped>
 .navBar {
-  background: #fff;
+  background: #fafafa;
+  border-bottom: 1px solid #eee;
   padding: 0 26px 0 24px;
   height: 100px;
   line-height: 100px;

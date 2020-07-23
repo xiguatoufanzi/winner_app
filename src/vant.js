@@ -20,6 +20,7 @@ import {
   Divider,
   Grid,
   GridItem,
+  Form,
 } from "vant";
 
 Vue.use(Button);
@@ -42,3 +43,4 @@ Vue.use(CheckboxGroup);
 Vue.use(Divider);
 Vue.use(Grid);
 Vue.use(GridItem);
+Vue.use(Form);

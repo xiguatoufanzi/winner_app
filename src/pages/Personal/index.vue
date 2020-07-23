@@ -2,7 +2,7 @@
   <div>
     <!-- 头部 -->
     <div class="userTop">
-      <div class="user">
+      <div class="user" @click="toLogin">
         <img
           src="http://thirdqq.qlogo.cn/g?b=oidb&k=MvtlngXWLiaofzZYQHAtJog&s=100&t=1556536864"
           alt=""
@@ -117,6 +117,12 @@ export default {
         icon: "",
       });
     }
+  },
+
+  methods: {
+    toLogin() {
+      this.$router.push("/login");
+    },
   },
 };
 </script>
