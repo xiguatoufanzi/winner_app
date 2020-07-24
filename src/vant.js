@@ -23,6 +23,7 @@ import {
   Form,
   Search,
   Tag,
+  NoticeBar,
 } from "vant";
 
 Vue.use(Button);
@@ -48,3 +49,4 @@ Vue.use(GridItem);
 Vue.use(Form);
 Vue.use(Search);
 Vue.use(Tag);
+Vue.use(NoticeBar);

@@ -39,6 +39,11 @@
 
     <div v-else class="cartuse" ref="wrapper">
       <!-- 有物品界面 -->
+      <van-notice-bar v-if="totalPrice !== 0">
+        {{
+          missPrice > 0 ? `再购￥${missPrice}免邮,去凑单>` : "以满足免邮条件"
+        }}
+      </van-notice-bar>
       <cartItem></cartItem>
 
       <!-- 底部 -->
@@ -48,7 +53,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import BScroll from "better-scroll";
 import cartItem from "./cartItem/cartItem";
 import CartBottom from "./CartBottom/CartBottom";
@@ -69,6 +74,12 @@ export default {
     ...mapState({
       cartList: (state) => state.cart.cartList,
     }),
+    ...mapGetters(["totalPrice"]),
+
+    // 计算是否包邮
+    missPrice() {
+      return 99 - this.totalPrice;
+    },
   },
 
   methods: {

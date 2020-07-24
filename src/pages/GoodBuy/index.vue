@@ -4,6 +4,7 @@
     <NavBar title="值得买"></NavBar>
     <div ref="wrapper2" class="goodContainer">
       <div>
+        
         <!-- 值得买面板 -->
         <div class="goodBuyList">
           <div class="goodTop">
