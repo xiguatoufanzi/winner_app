@@ -15,47 +15,24 @@
           </div>
 
           <!-- 轮播 -->
-          <!-- <div class="goodBottomContainer">
-          <div class="swiper-container goodBottom" ref="swiper">
-            <div class="swiper-wrapper">
-              <div
-                class="swiper-slide"
-                v-for="goodItem in goodBuyList"
-                :key="goodItem.id"
-              >
-                <div class="goodItem">
-                  <img :src="goodItem.picUrl" alt="" />
-                  <div class="mainTitle">{{ goodItem.mainTitle }}</div>
-                  <div class="viceTitle">
-                    {{ goodItem.viceTitle }}
-                  </div>
-                </div>
-                <div class="goodItem">
-                  <img :src="goodItem.picUrl" alt="" />
-                  <div class="mainTitle">{{ goodItem.mainTitle }}</div>
-                  <div class="viceTitle">
-                    {{ goodItem.viceTitle }}
+          <div class="goodBottomContainer">
+            <div class="swiper-container" ref="swiper">
+              <div class="swiper-wrapper">
+                <div
+                  class="swiper-slide"
+                  v-for="goodItem in goodBuyList"
+                  :key="goodItem.id"
+                >
+                  <div class="goodItem">
+                    <img :src="goodItem.picUrl" alt="" />
+                    <div class="mainTitle">{{ goodItem.mainTitle }}</div>
+                    <div class="viceTitle">
+                      {{ goodItem.viceTitle }}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="swiper-pagination"></div>
-            </div>
-          </div> -->
-
-          <div ref="wrapper" class="goodBottomContainer">
-            <div class="goodBottom">
-              <div
-                class="goodItem"
-                v-for="goodItem in goodBuyList"
-                :key="goodItem.id"
-              >
-                <img :src="goodItem.picUrl" alt="" />
-                <div class="mainTitle">{{ goodItem.mainTitle }}</div>
-                <div class="viceTitle">
-                  {{ goodItem.viceTitle }}
-                </div>
-              </div>
+              <div class="swiper-pagination"></div>
             </div>
           </div>
         </div>
@@ -90,7 +67,7 @@ export default {
     goodBuyList(value) {
       this.$nextTick(() => {
         this.initBScroll();
-        // this.initSwiper();
+        this.initSwiper();
       });
     },
   },
@@ -107,11 +84,6 @@ export default {
   methods: {
     // 创建BScroll
     initBScroll() {
-      let scroll = new BScroll(this.$refs.wrapper, {
-        scrollX: true,
-        click: true,
-      });
-
       this.scroll2 = new BScroll(this.$refs.wrapper2, {
         scrollY: true,
         click: true,
@@ -145,8 +117,10 @@ export default {
         pagination: {
           el: ".swiper-pagination",
         },
-        slidesPerColumn: 2,
-        slidesPerView: 4,
+        slidesPerColumn: 2, // 每行或每列放置数量
+        slidesPerColumnFill: "row", // 设置列或行
+        slidesPerView: 4, // 每行显示数量
+        threshold: 5,
       });
     },
 
@@ -168,19 +142,15 @@ export default {
 
 <style lang="less" scoped>
 // 轮播
-/* .swiper-container {
+.swiper-container {
   position: relative;
-  width: 710px;
+  width: 100%;
   height: 540px;
-  display: flex;
-  flex-wrap: wrap;
   .swiper-slide {
-    img {
-      width: 120px;
-      height: 120px;
-    }
+    width: 25%;
+    height: 40%;
+    margin-top: 24px;
     .goodItem {
-      margin: 0 24px;
       height: 201px;
       display: flex;
       flex-direction: column;
@@ -197,7 +167,6 @@ export default {
         width: 126px;
         height: 30px;
         white-space: nowrap;
-        overflow: hidden;
         color: #333333;
         text-align: center;
         line-height: 30px;
@@ -211,18 +180,19 @@ export default {
         height: 22.5px;
         line-height: 22.5px;
         white-space: nowrap;
-        overflow: hidden;
+        font-size: 20px;
       }
     }
   }
   /deep/.swiper-pagination {
-    --swiper-pagination-color: #fff;
+    --swiper-pagination-color: #dd1a21;
     .swiper-pagination-bullet {
       width: 40px;
       height: 4px;
+      margin: 0;
     }
   }
-} */
+}
 
 .goodContainer {
   height: calc(100vh - 200px);
@@ -265,50 +235,6 @@ export default {
     width: 710px;
     background: #fff;
     border-radius: 12px;
-    .goodBottom {
-      height: 540px;
-      width: 200%;
-      display: flex;
-      flex-wrap: wrap;
-      padding-top: 36px;
-      box-sizing: border-box;
-      .goodItem {
-        margin: 0 24px;
-        height: 201px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        > img {
-          width: 120px;
-          height: 120px;
-        }
-        .mainTitle {
-          font-family: "PingFang-SC-Bold";
-          font-weight: bold;
-          font-size: 28px;
-          width: 126px;
-          height: 30px;
-          white-space: nowrap;
-          overflow: hidden;
-          color: #333333;
-          text-align: center;
-          line-height: 30px;
-        }
-        .viceTitle {
-          width: 126px;
-          margin-top: 1.5px;
-          font-family: "PingFangSC-Regular";
-          color: #999999;
-          text-align: center;
-          height: 22.5px;
-          line-height: 22.5px;
-          white-space: nowrap;
-          overflow: hidden;
-          font-size: 20px;
-        }
-      }
-    }
   }
 }
 </style>

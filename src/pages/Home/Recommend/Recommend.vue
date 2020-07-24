@@ -238,7 +238,7 @@ export default {
         },
       ],
 
-      backtop: false,
+      backtop: false, // 去顶部按钮显示标识
     };
   },
 

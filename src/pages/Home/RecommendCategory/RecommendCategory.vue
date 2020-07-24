@@ -69,7 +69,7 @@ export default {
       handler(value) {
         this.$nextTick(() => {
           // 初始化轮播
-          // this.initSwiper();
+          this.initSwiper();
           this.initBScroll();
         });
       },
@@ -77,9 +77,9 @@ export default {
     },
 
     navData(value) {
-      // this.swiper1.update(true);
       this.$nextTick(() => {
         console.log(this.navId);
+        this.$refs.swiper.swiper.destroy(); //先销毁
         this.initSwiper();
       });
     },
