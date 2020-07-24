@@ -1,5 +1,6 @@
 let Koa = require("koa");
 let KoaRouter = require("koa-router");
+const Mock = require("mockjs");
 
 const app = new Koa();
 const router = new KoaRouter();
@@ -60,12 +61,19 @@ router.get("/searchInit", (ctx, next) => {
   };
 });
 
+// 搜索数据
 let search = require("./datas/search.json");
 router.post("/search", (ctx, next) => {
+  // mock数据
+  let testdata = Mock.mock({
+    "search|1-10": ["@cword(1, 4)"],
+  });
+  console.log(testdata);
+
   // 1. 请求参数： body
   ctx.body = {
     code: 200,
-    data: search,
+    data: testdata.search,
   };
 });
 
