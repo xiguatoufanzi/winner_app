@@ -7,6 +7,8 @@ const router = new KoaRouter();
 // 首页数据
 let homeData = require("./datas/index.json");
 router.get("/home", (ctx, next) => {
+  ctx;
+
   ctx.body = {
     code: 200,
     data: homeData,
@@ -49,9 +51,22 @@ router.get("/recManual", (ctx, next) => {
   };
 });
 
-router.post("/test2", (ctx, next) => {
+// 搜索页面初始数据
+let searchInit = require("./datas/searchInit.json");
+router.get("/searchInit", (ctx, next) => {
+  ctx.body = {
+    code: 200,
+    data: searchInit,
+  };
+});
+
+let search = require("./datas/search.json");
+router.post("/search", (ctx, next) => {
   // 1. 请求参数： body
-  ctx.body = "post请求的测试数据";
+  ctx.body = {
+    code: 200,
+    data: search,
+  };
 });
 
 app.use(router.routes()).use(router.allowedMethods());

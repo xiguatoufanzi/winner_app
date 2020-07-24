@@ -21,6 +21,8 @@ import {
   Grid,
   GridItem,
   Form,
+  Search,
+  Tag,
 } from "vant";
 
 Vue.use(Button);
@@ -44,3 +46,5 @@ Vue.use(Divider);
 Vue.use(Grid);
 Vue.use(GridItem);
 Vue.use(Form);
+Vue.use(Search);
+Vue.use(Tag);

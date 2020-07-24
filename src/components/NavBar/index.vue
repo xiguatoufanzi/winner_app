@@ -5,7 +5,13 @@
       <van-icon name="wap-home-o" size="26" color="#777" @click="gohome" />
       <span>{{ title }}</span>
       <div class="right">
-        <van-icon name="search" size="26" class="search" color="#777" />
+        <van-icon
+          name="search"
+          size="26"
+          class="search"
+          color="#777"
+          @click="goSearch"
+        />
         <van-icon
           name="shopping-cart-o"
           size="26"
@@ -31,6 +37,10 @@ export default {
   },
 
   methods: {
+    goSearch() {
+      this.$router.push("/search");
+    },
+
     gohome() {
       this.$router.push("/");
     },

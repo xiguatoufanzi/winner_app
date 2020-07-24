@@ -7,7 +7,7 @@
         <h1>
           <img src="@/assets/images/logo.png" alt="" />
         </h1>
-        <div class="searchContainer">
+        <div class="searchContainer" @click="toSearch">
           <i class="iconfont icon-sousuo"></i>
           <span>搜索商品，共34085款好物</span>
         </div>
@@ -116,6 +116,10 @@ export default {
   },
 
   methods: {
+    toSearch() {
+      this.$router.push("/search");
+    },
+
     toLogin() {
       this.$router.push("/login");
     },

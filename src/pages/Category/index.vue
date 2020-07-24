@@ -1,7 +1,7 @@
 <template>
   <div style="background:#fff">
     <!-- 搜索 -->
-    <div class="searchContainer">
+    <div class="searchContainer" @click="toSearch">
       <div class="search">
         <i class="iconfont icon-sousuo"></i>
         <span>搜索商品，共34085款好物</span>
@@ -69,6 +69,10 @@ export default {
   },
 
   methods: {
+    toSearch() {
+      this.$router.push("/search");
+    },
+
     // 改变导航选中
     changeNav(index) {
       this.cateList = this.cateLists[index];
