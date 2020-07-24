@@ -242,14 +242,21 @@ export default {
     };
   },
 
-  mounted() {},
+  mounted() {
+    this.initSwiper();
+  },
 
   watch: {
-    homeData(value) {
-      this.$nextTick(() => {
-        this.initSwiper();
-        this.initBScroll();
-      });
+    homeData: {
+      handler(value) {
+        this.$nextTick(() => {
+          // 初始化轮播
+          this.$refs.swiper.swiper.destroy(); //先销毁
+          this.initSwiper();
+          this.initBScroll();
+        });
+      },
+      immediate: true, // 初始显示之前就立即调用一次
     },
   },
 
