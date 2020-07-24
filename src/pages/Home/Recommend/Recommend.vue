@@ -244,6 +244,7 @@ export default {
 
   mounted() {
     this.initSwiper();
+    this.initBScroll();
   },
 
   watch: {
@@ -252,6 +253,7 @@ export default {
         this.$nextTick(() => {
           // 初始化轮播
           this.$refs.swiper.swiper.destroy(); //先销毁
+          this.bs.destroy();
           this.initSwiper();
           this.initBScroll();
         });
