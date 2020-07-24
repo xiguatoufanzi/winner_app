@@ -45,7 +45,7 @@ export default {
       this.$router.push("/");
     },
     goCart() {
-      this.$router.push("cart");
+      this.$router.push("/cart");
     },
   },
 };
